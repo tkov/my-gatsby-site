@@ -1,8 +1,9 @@
 // Step 1: Import React
 import * as React from 'react'
-import { Link } from 'gatsby'
-import Layout from '../components/layout';
+import Layout from '../components/layout'
 
+// npm install gatsby-plugin-image gatsby-plugin-sharp gatsby-source-filesystem
+import { StaticImage } from 'gatsby-plugin-image'
 
 // Step 2: Define a component
 
@@ -16,6 +17,10 @@ const IndexPage = () => {
     // </main>
     <Layout pageTitle="Home Page">
       <p>I'm making this by following the Gatsby Tutorial.</p>
+      <StaticImage
+        alt="Hollow Knight"
+        src="../images/hollow-knight.jpg"
+      />
     </Layout>
 
   )
