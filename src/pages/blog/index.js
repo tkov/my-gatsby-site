@@ -1,6 +1,6 @@
 import * as React from 'react'
-import Layout from '../components/layout'
-import { graphql } from 'gatsby'
+import Layout from '../../components/layout'
+import { graphql, Link } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 // This is a page query 
@@ -14,6 +14,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 //     }
 //   }`;
 
+
+// adding slug field to query...
 export const query = graphql`
   query {
     allMdx(sort: {fields: frontmatter___date, order: DESC}) {
@@ -23,7 +25,7 @@ export const query = graphql`
           title
         }
         id
-        body
+        slug
       }
     }
   }
@@ -38,21 +40,22 @@ const BlogPage = ({ data }) => {  // destructuring data from props
 
             {/* <p>My cool posts will go in here</p> */}
             {/* Note: React requires a key for mapped elements */}
-            <ul>
                 {
                     //data.allFile.nodes.map((node) => (
                     data.allMdx.nodes.map((node) => (
-                      
                         <article key={node.id}>
-                            <h2> { node.frontmatter.title } </h2>
+                            <h2>
+                              <Link to={`/blog/${node.slug}`}>
+                                { node.frontmatter.title } 
+                              </Link>
+                            </h2>
                             <p>Posted: { node.frontmatter.date } </p>
-                            <MDXRenderer>
+                            {/* <MDXRenderer>
                                 { node.body }
-                            </MDXRenderer>
+                            </MDXRenderer> */}
                         </article>
                     ))
                 }
-            </ul>
         </Layout>
     )
 }
